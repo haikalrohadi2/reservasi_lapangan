@@ -1,11 +1,16 @@
 <?php
 include 'koneksi.php';
 
-$data = mysqli_query($conn, "SELECT * FROM reservasi");
+$data = mysqli_query($conn, "
+SELECT reservasi.*, lapangan.nama_lapangan 
+FROM reservasi 
+JOIN lapangan ON reservasi.id_lapangan = lapangan.id_lapangan
+");
 ?>
 
 <h2>Data Reservasi</h2>
-<a href="tambah.php">Tambah Data</a>
+<a href="create.php">Tambah Data</a>
+
 <table border="1">
 <tr>
     <th>ID</th>
@@ -13,22 +18,15 @@ $data = mysqli_query($conn, "SELECT * FROM reservasi");
     <th>Lapangan</th>
     <th>Tanggal</th>
     <th>Jam</th>
-    <th>Aksi</th>
 </tr>
 
-<?php while($row = mysqli_fetch_assoc($data)) { ?>
+<?php while($r = mysqli_fetch_assoc($data)) { ?>
 <tr>
-    <td><?= $row['id_reservasi'] ?></td>
-    <td><?= $row['nama_pemesan'] ?></td>
-    <td><?= $row['id_lapangan'] ?></td>
-    <td><?= $row['tanggal'] ?></td>
-    <td><?= $row['jam_mulai'] ?> - <?= $row['jam_selesai'] ?></td>
-    <td>
-        <a href="edit.php?id=<?= $row['id_reservasi'] ?>">Edit</a>
-        <a href="hapus.php?id=<?= $row['id_reservasi'] ?>">Hapus</a>
-    </td>
+    <td><?= $r['id_reservasi'] ?></td>
+    <td><?= $r['nama_pemesan'] ?></td>
+    <td><?= $r['nama_lapangan'] ?></td>
+    <td><?= $r['tanggal'] ?></td>
+    <td><?= $r['jam_mulai'] ?> - <?= $r['jam_selesai'] ?></td>
 </tr>
 <?php } ?>
 </table>
-
-//read

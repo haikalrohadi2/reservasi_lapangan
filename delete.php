@@ -1,11 +1,18 @@
 <?php
 include 'koneksi.php';
 
-$id = $_GET['id'];
+if(isset($_POST['hapus'])){
+    $id = $_POST['id'];
 
-mysqli_query($conn, "DELETE FROM reservasi WHERE id_reservasi=$id");
+    mysqli_query($conn, "DELETE FROM reservasi WHERE id_reservasi=$id");
 
-header("Location: index.php");
+    echo "Data berhasil dihapus";
+}
 ?>
 
-//delete
+<h3>Hapus Data</h3>
+
+<form method="POST">
+    ID: <input type="number" name="id">
+    <button name="hapus">Hapus</button>
+</form>
