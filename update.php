@@ -9,7 +9,7 @@ if(isset($_POST['cari'])){
     $row = mysqli_fetch_assoc($data);
 }
 
-// proses update
+
 if(isset($_POST['update'])){
     $id = $_POST['id'];
     $nama = $_POST['nama'];
